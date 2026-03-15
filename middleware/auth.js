@@ -13,11 +13,18 @@ function requireAdmin(req, res, next) {
 }
 
 function setLocals(req, res, next) {
-  res.locals.user = req.session.userId ? {
-    id: req.session.userId,
-    nome: req.session.userName,
-    isAdmin: req.session.isAdmin
-  } : null;
+  if (req.session.userId) {
+    const db = require('../database/db');
+    const row = db.prepare('SELECT status_pagamento FROM usuarios WHERE id = ?').get(req.session.userId);
+    res.locals.user = {
+      id: req.session.userId,
+      nome: req.session.userName,
+      isAdmin: req.session.isAdmin,
+      statusPagamento: row ? row.status_pagamento : 'pendente'
+    };
+  } else {
+    res.locals.user = null;
+  }
   next();
 }
 

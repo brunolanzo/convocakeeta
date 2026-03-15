@@ -38,4 +38,17 @@ CREATE TABLE IF NOT EXISTS sugestoes (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+CREATE TABLE IF NOT EXISTS dados_bancarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario_id INTEGER NOT NULL UNIQUE,
+  nome_completo TEXT,
+  cpf TEXT,
+  banco TEXT,
+  agencia TEXT,
+  conta_corrente TEXT,
+  chave_pix TEXT,
+  updated_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
 INSERT OR IGNORE INTO configuracoes (chave, valor) VALUES ('prazo_apostas', '2026-05-15T23:59:59');

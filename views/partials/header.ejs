@@ -55,6 +55,10 @@
         <a href="/estatisticas" class="nav-link">Estatísticas</a>
         <% if (user) { %>
           <a href="/apostas" class="nav-link">Minha Aposta</a>
+          <a href="/pagamento" class="nav-link flex items-center gap-1.5">
+            Pagamento
+            <span class="status-light <%= user.statusPagamento === 'pago' ? 'status-pago' : 'status-pendente' %>"></span>
+          </a>
           <% if (user.isAdmin) { %>
             <a href="/admin" class="btn-copa btn-admin">Admin</a>
           <% } %>
@@ -76,6 +80,10 @@
       <a href="/estatisticas" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Estatísticas</a>
       <% if (user) { %>
         <a href="/apostas" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Minha Aposta</a>
+        <a href="/pagamento" class="flex items-center gap-2 py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">
+          Pagamento
+          <span class="status-light <%= user.statusPagamento === 'pago' ? 'status-pago' : 'status-pendente' %>"></span>
+        </a>
         <% if (user.isAdmin) { %>
           <a href="/admin" class="block py-2 px-3 rounded-lg text-copa-orange font-semibold">Admin</a>
         <% } %>

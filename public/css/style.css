@@ -340,6 +340,30 @@ body {
   background-clip: text;
 }
 
+/* ========== Status Light (nav) ========== */
+.status-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-pago {
+  background: #2EC4B6;
+  box-shadow: 0 0 4px rgba(46, 196, 182, 0.5);
+}
+
+.status-pendente {
+  background: #E63946;
+  animation: status-blink 1s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(230, 57, 70, 0.6); }
+  50% { opacity: 0.3; box-shadow: none; }
+}
+
 /* ========== Badge / Tags ========== */
 .badge-pago {
   background: linear-gradient(135deg, rgba(46, 196, 182, 0.15), rgba(46, 196, 182, 0.05));

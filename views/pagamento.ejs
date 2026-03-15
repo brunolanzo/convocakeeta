@@ -1,0 +1,147 @@
+<%- include('partials/header') %>
+
+<div class="animate-fade-in-up max-w-2xl mx-auto">
+  <h1 class="text-2xl font-bold text-copa-dark mb-2">Pagamento</h1>
+  <p class="text-gray-500 text-sm mb-6">Informacoes sobre inscricao e dados bancarios para premiacao.</p>
+
+  <% if (sucesso) { %>
+    <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl text-sm mb-4"><%= sucesso %></div>
+  <% } %>
+  <% if (erro) { %>
+    <div class="bg-red-50 border border-red-200 text-copa-coral px-4 py-3 rounded-xl text-sm mb-4"><%= erro %></div>
+  <% } %>
+
+  <!-- Status do pagamento -->
+  <div class="card-copa p-6 mb-6">
+    <% if (statusPagamento === 'pago') { %>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="font-bold text-emerald-700 text-lg">Pagamento Confirmado</h2>
+          <% if (dataPagamento) { %>
+            <p class="text-emerald-600 text-sm">Confirmado em <%= new Date(dataPagamento).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }) %></p>
+          <% } %>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4m0 4h.01"/>
+            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="font-bold text-amber-700 text-lg">Pagamento Pendente</h2>
+          <p class="text-amber-600 text-sm">Realize o pagamento via PIX abaixo</p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Dados para pagamento -->
+  <div class="card-copa p-6 mb-6">
+    <div class="flex items-center gap-2 mb-4">
+      <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+        <span class="text-lg">$</span>
+      </div>
+      <h2 class="font-bold text-copa-dark text-lg">Dados para Pagamento</h2>
+    </div>
+
+    <div class="flex items-center justify-between py-3 border-b border-gray-100">
+      <span class="text-gray-500 text-sm">Valor da inscricao</span>
+      <span class="font-bold text-copa-dark text-xl">R$ 50,00</span>
+    </div>
+
+    <div class="py-3 border-b border-gray-100">
+      <span class="text-gray-500 text-sm block mb-1">Chave PIX</span>
+      <div class="flex items-center gap-2">
+        <code class="bg-gray-100 px-3 py-1.5 rounded-lg text-sm font-mono" id="chavePix">bruno.lanzo@gmail.com</code>
+        <button type="button" onclick="copiarPix()" class="text-copa-teal border border-copa-teal text-xs px-3 py-1.5 rounded-lg hover:bg-copa-teal hover:text-white transition" id="btnCopiar">Copiar</button>
+      </div>
+    </div>
+
+    <div class="py-3 border-b border-gray-100">
+      <span class="text-gray-500 text-sm block mb-1">Titular</span>
+      <span class="font-semibold text-copa-dark">Bruno Lanzo</span>
+    </div>
+
+    <div class="py-3">
+      <span class="text-gray-500 text-sm block mb-1">Contato para duvidas</span>
+      <span class="font-semibold text-copa-dark">Bruno Lanzo</span>
+      <div class="text-sm text-gray-500">
+        WhatsApp: <a href="https://wa.me/5511981315913" target="_blank" class="text-copa-teal hover:underline">(11) 98131-5913</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dados bancarios para premiacao -->
+  <div class="card-copa p-6 mb-6">
+    <div class="flex items-center gap-2 mb-2">
+      <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+        <span class="text-lg">&#x1F3E6;</span>
+      </div>
+      <h2 class="font-bold text-copa-dark text-lg">Dados Bancarios para Premiacao</h2>
+    </div>
+    <p class="text-gray-500 text-sm mb-4">Preencha seus dados bancarios para receber a premiacao caso seja um dos vencedores.</p>
+
+    <form method="POST" action="/pagamento" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+        <input type="text" name="nome_completo" value="<%= dados.nome_completo || '' %>" class="w-full input-copa" placeholder="Seu nome completo">
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+          <input type="text" name="cpf" value="<%= dados.cpf || '' %>" class="w-full input-copa" placeholder="000.000.000-00">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Banco</label>
+          <input type="text" name="banco" value="<%= dados.banco || '' %>" class="w-full input-copa" placeholder="Nome do banco">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Agencia</label>
+          <input type="text" name="agencia" value="<%= dados.agencia || '' %>" class="w-full input-copa" placeholder="0000">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Conta Corrente</label>
+          <input type="text" name="conta_corrente" value="<%= dados.conta_corrente || '' %>" class="w-full input-copa" placeholder="00000-0">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Chave PIX (para recebimento)</label>
+        <input type="text" name="chave_pix" value="<%= dados.chave_pix || '' %>" class="w-full input-copa" placeholder="CPF, email, telefone ou chave aleatoria">
+      </div>
+
+      <div class="text-right pt-2">
+        <button type="submit" class="btn-copa btn-teal px-6 py-2.5">Salvar Dados Bancarios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function copiarPix() {
+  const pix = document.getElementById('chavePix').textContent;
+  navigator.clipboard.writeText(pix).then(() => {
+    const btn = document.getElementById('btnCopiar');
+    btn.textContent = 'Copiado!';
+    btn.classList.add('bg-copa-teal', 'text-white');
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('bg-copa-teal', 'text-white');
+    }, 2000);
+  });
+}
+</script>
+
+<%- include('partials/footer') %>
