@@ -100,21 +100,24 @@ if (apostaForm && typeof jogadoresSelecionados !== 'undefined') {
 
     const goleirosCount = contarGoleirosSelecionados();
 
+    // Filtrar goleiros não selecionados quando limite atingido
+    if (goleirosCount >= MAX_GOLEIROS) {
+      filtrados = filtrados.filter(j => j.posicao !== 'Goleiro' || selecionados.includes(j.nome));
+    }
+
     resultadosDiv.innerHTML = filtrados.map(j => {
       const jaSelecionado = selecionados.includes(j.nome);
-      const goleiroLimite = j.posicao === 'Goleiro' && goleirosCount >= MAX_GOLEIROS && !jaSelecionado;
       const cores = coresPosicao[j.posicao] || { dot: 'bg-gray-400' };
 
       return `
-        <div class="jogador-item ${jaSelecionado ? 'selecionado' : ''} ${goleiroLimite ? 'opacity-40 cursor-not-allowed' : ''}"
-             ${!jaSelecionado && !prazoExpirado && !goleiroLimite ? `onclick="adicionarJogador('${j.nome.replace(/'/g, "\\'")}')"` : ''}>
+        <div class="jogador-item ${jaSelecionado ? 'selecionado' : ''}"
+             ${!jaSelecionado && !prazoExpirado ? `onclick="adicionarJogador('${j.nome.replace(/'/g, "\\'")}')"` : ''}>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full ${cores.dot} flex-shrink-0"></span>
             <span class="font-medium">${j.nome}</span>
             <span class="text-xs text-gray-500">${j.posicao} - ${j.clube}</span>
           </div>
           ${jaSelecionado ? '<span class="text-copa-teal text-xs font-semibold">Selecionado</span>' : ''}
-          ${goleiroLimite ? '<span class="text-amber-500 text-xs">Limite</span>' : ''}
         </div>
       `;
     }).join('');
