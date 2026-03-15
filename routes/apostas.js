@@ -36,6 +36,20 @@ router.post('/apostas', requireAuth, (req, res) => {
     });
   }
 
+  // Validar máximo de 3 goleiros
+  const listaJogadores = require('../data/jogadores.json');
+  const goleiros = jogadores.filter(nome => {
+    const j = listaJogadores.find(jg => jg.nome === nome);
+    return j && j.posicao === 'Goleiro';
+  });
+  if (goleiros.length > 3) {
+    return res.render('apostas/form', {
+      jogadoresSelecionados: jogadores,
+      erro: `Máximo de 3 goleiros permitidos. Você selecionou ${goleiros.length}.`,
+      sucesso: null
+    });
+  }
+
   const existing = db.prepare('SELECT id FROM apostas WHERE usuario_id = ?').get(req.session.userId);
 
   if (existing) {

@@ -28,4 +28,14 @@ CREATE TABLE IF NOT EXISTS configuracoes (
   valor TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS sugestoes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario_id INTEGER NOT NULL,
+  jogador TEXT NOT NULL,
+  clube_posicao TEXT,
+  mensagem TEXT,
+  created_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
 INSERT OR IGNORE INTO configuracoes (chave, valor) VALUES ('prazo_apostas', '2026-05-15T23:59:59');

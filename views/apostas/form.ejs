@@ -25,23 +25,36 @@
         <h2 class="text-lg font-semibold mb-3">Buscar jogador</h2>
         <% if (!prazoExpirado) { %>
           <input type="text" id="buscaJogador" placeholder="Digite o nome, posição ou clube..."
-            class="w-full input-copa mb-3">
-          <div id="resultadosBusca" class="max-h-96 overflow-y-auto space-y-1"></div>
+            class="w-full input-copa mb-2">
+          <!-- Filtros de posição -->
+          <div class="flex flex-wrap gap-2 mb-3">
+            <button type="button" class="filtro-posicao active text-xs px-3 py-1 rounded-full border transition" data-posicao="todas">Todas</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Goleiro">Goleiros</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Zagueiro">Zagueiros</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Lateral">Laterais</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Volante">Volantes</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Meia">Meias</button>
+            <button type="button" class="filtro-posicao text-xs px-3 py-1 rounded-full border transition" data-posicao="Atacante">Atacantes</button>
+          </div>
+          <div id="limiteGoleiros" class="hidden bg-amber-50 border border-amber-200 text-amber-700 px-3 py-2 rounded-lg text-xs mb-2">
+            Limite de 3 goleiros atingido.
+          </div>
+          <div id="resultadosBusca" class="max-h-80 overflow-y-auto space-y-1"></div>
         <% } else { %>
           <p class="text-gray-500 text-sm">Apostas travadas.</p>
         <% } %>
       </div>
 
-      <!-- Lista selecionada -->
+      <!-- Lista selecionada agrupada por posição -->
       <div class="card-copa p-6">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-lg font-semibold">Sua lista</h2>
+          <h2 class="text-lg font-semibold">Seu plantel</h2>
           <span id="contagem" class="text-sm font-bold px-3 py-1 rounded-full
             <%= jogadoresSelecionados.length === 26 ? 'badge-pago' : 'bg-amber-50 border border-amber-200 text-amber-700' %>">
             <%= jogadoresSelecionados.length %>/26
           </span>
         </div>
-        <div id="listaSelecionados" class="space-y-1 max-h-96 overflow-y-auto"></div>
+        <div id="listaSelecionados" class="space-y-4 max-h-[500px] overflow-y-auto"></div>
       </div>
     </div>
 
@@ -55,6 +68,30 @@
       </div>
     <% } %>
   </form>
+
+  <!-- Formulário "Não encontrou um jogador?" -->
+  <% if (!prazoExpirado) { %>
+  <div class="mt-10 text-center">
+    <p class="text-gray-500 text-sm mb-2">Não encontrou um jogador?
+      <button type="button" id="btnAbrirContato" class="text-copa-teal font-semibold hover:underline">Avise o Adm</button>
+    </p>
+
+    <div id="formContato" class="hidden max-w-md mx-auto mt-4 card-copa p-6 animate-slide-down">
+      <h3 class="text-sm font-semibold text-copa-dark mb-3">Sugerir jogador ao administrador</h3>
+      <form id="contatoForm" class="space-y-3">
+        <input type="text" name="jogadorSugerido" placeholder="Nome do jogador" required
+          class="w-full input-copa text-sm">
+        <input type="text" name="clubePosicao" placeholder="Clube e posição (opcional)"
+          class="w-full input-copa text-sm">
+        <textarea name="mensagem" placeholder="Observação (opcional)" rows="2"
+          class="w-full input-copa text-sm resize-none"></textarea>
+        <button type="submit" class="btn-copa btn-purple text-sm w-full">Enviar sugestão</button>
+      </form>
+      <div id="contatoSucesso" class="hidden text-emerald-600 text-sm mt-3">Sugestão enviada com sucesso!</div>
+      <div id="contatoErro" class="hidden text-copa-coral text-sm mt-3">Erro ao enviar. Tente novamente.</div>
+    </div>
+  </div>
+  <% } %>
 </div>
 
 <script>

@@ -506,3 +506,22 @@ body {
 .copa-logo:hover {
   transform: scale(1.05) rotate(2deg);
 }
+
+/* ========== Filtros de posição ========== */
+.filtro-posicao {
+  background: white;
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  cursor: pointer;
+}
+
+.filtro-posicao:hover {
+  border-color: var(--teal);
+  color: var(--teal-dark);
+}
+
+.filtro-posicao.active {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: white;
+  border-color: transparent;
+}

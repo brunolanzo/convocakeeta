@@ -68,6 +68,50 @@ app.get('/api/jogadores', (req, res) => {
   res.json(filtered);
 });
 
+// API: contato (sugerir jogador ao admin)
+app.post('/api/contato', (req, res) => {
+  if (!req.session.userId) return res.status(401).json({ error: 'Não autenticado' });
+
+  const { jogadorSugerido, clubePosicao, mensagem } = req.body;
+  if (!jogadorSugerido || !jogadorSugerido.trim()) {
+    return res.status(400).json({ error: 'Nome do jogador é obrigatório' });
+  }
+
+  const usuario = db.prepare('SELECT nome, email FROM usuarios WHERE id = ?').get(req.session.userId);
+
+  // Salvar sugestão no banco (tabela criada abaixo)
+  db.prepare('INSERT INTO sugestoes (usuario_id, jogador, clube_posicao, mensagem) VALUES (?, ?, ?, ?)')
+    .run(req.session.userId, jogadorSugerido.trim(), clubePosicao || '', mensagem || '');
+
+  // Tentar enviar email (falha silenciosa se não configurado)
+  try {
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      }
+    });
+
+    if (process.env.SMTP_USER) {
+      transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: process.env.ADMIN_CONTACT_EMAIL || 'bruno.lanzo@gmail.com',
+        subject: `[ConvocaKeeta] Sugestão de jogador: ${jogadorSugerido}`,
+        text: `Participante: ${usuario.nome} (${usuario.email})\n` +
+              `Jogador sugerido: ${jogadorSugerido}\n` +
+              `Clube/Posição: ${clubePosicao || '-'}\n` +
+              `Observação: ${mensagem || '-'}`
+      }).catch(() => {});
+    }
+  } catch { /* nodemailer não configurado */ }
+
+  res.json({ ok: true });
+});
+
 app.listen(PORT, () => {
   console.log(`ConvocaKeeta rodando em http://localhost:${PORT}`);
 });
