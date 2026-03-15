@@ -1,67 +1,112 @@
 <%- include('partials/header') %>
 
-<div class="text-center mb-10">
-  <h1 class="text-4xl font-bold text-brasil-blue mb-2">Bolão da Convocação</h1>
-  <p class="text-xl text-gray-600">Copa do Mundo 2026 - Seleção Brasileira</p>
+<!-- Hero Section -->
+<section class="hero-copa -mx-4 -mt-8 px-4 pt-12 pb-16 mb-10 relative">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <div class="flex justify-center mb-6 animate-fade-in-up">
+      <img src="/img/copa2026-logo.jpg"
+        alt="Logo Copa do Mundo 2026" class="copa-logo h-28 md:h-36 rounded-2xl">
+    </div>
+    <h1 class="text-4xl md:text-5xl font-black text-white mb-3 animate-fade-in-up animate-delay-100">
+      Bolão da Convocação
+    </h1>
+    <p class="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up animate-delay-200">
+      Copa do Mundo 2026 - Seleção Brasileira
+    </p>
+
+    <% if (user) { %>
+      <a href="/apostas" class="btn-copa btn-teal text-lg animate-fade-in-up animate-delay-300">
+        Fazer minha aposta
+      </a>
+    <% } else { %>
+      <a href="/registro" class="btn-copa btn-teal text-lg animate-fade-in-up animate-delay-300">
+        Cadastrar e participar
+      </a>
+    <% } %>
+  </div>
+</section>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-3 gap-4 md:gap-6 mb-10">
+  <div class="card-copa card-copa-color card-teal p-5 md:p-6 text-center animate-fade-in-up animate-delay-100">
+    <div class="stat-number mb-1">26</div>
+    <div class="text-gray-500 text-sm font-medium">Jogadores</div>
+  </div>
+  <div class="card-copa card-copa-color card-coral p-5 md:p-6 text-center animate-fade-in-up animate-delay-200">
+    <div class="stat-number coral mb-1">260</div>
+    <div class="text-gray-500 text-sm font-medium">Pontos máximos</div>
+  </div>
+  <div class="card-copa card-copa-color card-purple p-5 md:p-6 text-center animate-fade-in-up animate-delay-300">
+    <div class="stat-number purple mb-1"><%= totalParticipantes %></div>
+    <div class="text-gray-500 text-sm font-medium">Participantes</div>
+  </div>
 </div>
 
-<div class="grid md:grid-cols-3 gap-6 mb-10">
-  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-green">
-    <div class="text-3xl font-bold text-brasil-green mb-1">26</div>
-    <div class="text-gray-600">Jogadores para escolher</div>
-  </div>
-  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-yellow">
-    <div class="text-3xl font-bold text-brasil-blue mb-1">260</div>
-    <div class="text-gray-600">Pontuação máxima</div>
-  </div>
-  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-blue">
-    <div class="text-3xl font-bold text-brasil-blue mb-1"><%= totalParticipantes %></div>
-    <div class="text-gray-600">Participantes</div>
-  </div>
-</div>
-
+<!-- Countdown -->
 <% if (prazo) { %>
-<div class="bg-white rounded-xl shadow p-6 mb-10 text-center">
-  <h2 class="text-lg font-semibold text-gray-700 mb-2">Prazo para enviar sua aposta</h2>
-  <div id="countdown" class="text-3xl font-bold text-brasil-blue" data-prazo="<%= prazo %>"></div>
-  <p class="text-sm text-gray-500 mt-2"><%= new Date(prazo).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) %></p>
+<div class="countdown-box rounded-2xl p-6 md:p-8 mb-10 text-center animate-fade-in-up animate-delay-400">
+  <p class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-3">Prazo para enviar sua aposta</p>
+  <div id="countdown" class="countdown-number" data-prazo="<%= prazo %>"></div>
+  <p class="text-gray-500 text-xs mt-3">
+    <%= new Date(prazo).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) %>
+  </p>
 </div>
 <% } %>
 
-<div class="bg-white rounded-xl shadow p-6 mb-10">
-  <h2 class="text-2xl font-bold text-brasil-blue mb-4">Regras</h2>
-  <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+<!-- Regras -->
+<div class="card-copa p-6 md:p-8 mb-10 animate-fade-in-up animate-delay-500">
+  <h2 class="text-2xl font-bold text-copa-dark mb-5">Regras</h2>
+  <div class="grid md:grid-cols-2 gap-6">
     <div>
-      <h3 class="font-semibold mb-2">Como funciona</h3>
-      <ul class="list-disc list-inside space-y-1 text-sm">
-        <li>Escolha <strong>exatamente 26 jogadores</strong> para a convocação</li>
-        <li>Cada jogador correto vale <strong>10 pontos</strong></li>
-        <li>Pontuação máxima: <strong>260 pontos</strong></li>
-        <li>Apostas podem ser editadas até o prazo final</li>
+      <h3 class="font-bold text-copa-teal mb-3 flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-copa-teal/10 flex items-center justify-center text-copa-teal">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </span>
+        Como funciona
+      </h3>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2">
+          <span class="text-copa-teal mt-0.5">&#9679;</span>
+          Escolha <strong>exatamente 26 jogadores</strong> para a convocação
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-copa-teal mt-0.5">&#9679;</span>
+          Cada jogador correto vale <strong>10 pontos</strong>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-copa-teal mt-0.5">&#9679;</span>
+          Pontuação máxima: <strong>260 pontos</strong>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-copa-teal mt-0.5">&#9679;</span>
+          Apostas podem ser editadas até o prazo final
+        </li>
       </ul>
     </div>
     <div>
-      <h3 class="font-semibold mb-2">Critérios de desempate</h3>
-      <ol class="list-decimal list-inside space-y-1 text-sm">
-        <li><strong>Pontuação total</strong> (maior primeiro)</li>
-        <li><strong>Índice de jogador inusitado</strong> (maior primeiro)</li>
-        <li><strong>Sorteio automático</strong></li>
+      <h3 class="font-bold text-copa-purple mb-3 flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-copa-purple/10 flex items-center justify-center text-copa-purple">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </span>
+        Critérios de desempate
+      </h3>
+      <ol class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2">
+          <span class="text-copa-purple font-bold">1.</span>
+          <strong>Pontuação total</strong> (maior primeiro)
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-copa-purple font-bold">2.</span>
+          <strong>Índice de jogador inusitado</strong> (maior primeiro)
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-copa-purple font-bold">3.</span>
+          <strong>Sorteio automático</strong>
+        </li>
       </ol>
-      <p class="text-xs text-gray-500 mt-2">O índice inusitado premia quem acertou jogadores que poucos apostaram.</p>
+      <p class="text-xs text-gray-400 mt-3 pl-5">O índice inusitado premia quem acertou jogadores que poucos apostaram.</p>
     </div>
   </div>
-</div>
-
-<div class="text-center">
-  <% if (user) { %>
-    <a href="/apostas" class="inline-block bg-brasil-green text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
-      Fazer minha aposta
-    </a>
-  <% } else { %>
-    <a href="/registro" class="inline-block bg-brasil-green text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
-      Cadastrar e participar
-    </a>
-  <% } %>
 </div>
 
 <%- include('partials/footer') %>

@@ -1,34 +1,36 @@
 <%- include('partials/header') %>
 
-<h1 class="text-2xl font-bold text-brasil-blue mb-6">Convocação Oficial</h1>
+<div class="animate-fade-in-up">
+  <h1 class="text-2xl font-bold text-copa-dark mb-6">Convocação Oficial</h1>
 
-<% if (jogadoresConvocados.length === 0) { %>
-  <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
-    A convocação oficial ainda não foi publicada. Aguarde o anúncio da CBF.
-  </div>
-<% } else { %>
-  <p class="text-sm text-gray-500 mb-4">
-    Publicada em: <%= dataPublicacao ? new Date(dataPublicacao).toLocaleString('pt-BR') : '-' %>
-  </p>
+  <% if (jogadoresConvocados.length === 0) { %>
+    <div class="bg-amber-50 border border-amber-200 text-amber-700 px-4 py-3 rounded-xl text-sm">
+      A convocação oficial ainda não foi publicada. Aguarde o anúncio da CBF.
+    </div>
+  <% } else { %>
+    <p class="text-sm text-gray-500 mb-4">
+      Publicada em: <%= dataPublicacao ? new Date(dataPublicacao).toLocaleString('pt-BR') : '-' %>
+    </p>
 
-  <div class="bg-white rounded-xl shadow overflow-hidden">
-    <table class="w-full">
-      <thead class="bg-brasil-green text-white">
-        <tr>
-          <th class="px-4 py-2 text-left">#</th>
-          <th class="px-4 py-2 text-left">Jogador</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% jogadoresConvocados.forEach((jogador, i) => { %>
-          <tr class="border-b">
-            <td class="px-4 py-2 text-gray-500"><%= i + 1 %></td>
-            <td class="px-4 py-2 font-medium"><%= jogador %></td>
+    <div class="card-copa overflow-hidden">
+      <table class="w-full table-copa">
+        <thead class="bg-copa-dark">
+          <tr>
+            <th class="px-4 py-2 text-left">#</th>
+            <th class="px-4 py-2 text-left">Jogador</th>
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
-<% } %>
+        </thead>
+        <tbody>
+          <% jogadoresConvocados.forEach((jogador, i) => { %>
+            <tr class="border-b">
+              <td class="px-4 py-2 text-gray-500"><%= i + 1 %></td>
+              <td class="px-4 py-2 font-medium"><%= jogador %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
 
 <%- include('partials/footer') %>

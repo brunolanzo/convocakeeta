@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConvocaKeeta - Bolão Copa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
           colors: {
-            brasil: { green: '#009c3b', yellow: '#ffdf00', blue: '#002776' }
+            copa: {
+              teal: '#2EC4B6',
+              purple: '#7B2D8E',
+              coral: '#E63946',
+              lime: '#A8D948',
+              lavender: '#9B8EC1',
+              orange: '#FF6B35',
+              blue: '#4361EE',
+              dark: '#1A1A2E',
+            }
           }
         }
       }
@@ -18,59 +31,62 @@
   </script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
-  <nav class="bg-brasil-blue text-white shadow-lg">
+<body class="bg-gray-50 min-h-screen flex flex-col font-inter">
+  <!-- Rainbow stripe -->
+  <div class="copa-stripe"></div>
+
+  <nav class="nav-copa">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="text-xl font-bold">
-        <span class="text-brasil-yellow">ConvocaKeeta</span>
-      </a>
+      <a href="/" class="logo">ConvocaKeeta</a>
 
       <!-- Hamburger mobile -->
-      <button id="menuToggle" class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+      <button class="md:hidden text-gray-300 hover:text-white focus:outline-none transition"
+        onclick="const m = document.getElementById('mobileMenu'); m.classList.toggle('hidden');">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
 
       <!-- Desktop menu -->
-      <div class="hidden md:flex items-center gap-4 text-sm">
-        <a href="/" class="hover:text-brasil-yellow transition">Início</a>
-        <a href="/ranking" class="hover:text-brasil-yellow transition">Ranking</a>
-        <a href="/convocacao" class="hover:text-brasil-yellow transition">Convocação</a>
-        <a href="/estatisticas" class="hover:text-brasil-yellow transition">Estatísticas</a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/ranking" class="nav-link">Ranking</a>
+        <a href="/convocacao" class="nav-link">Convocação</a>
+        <a href="/estatisticas" class="nav-link">Estatísticas</a>
         <% if (user) { %>
-          <a href="/apostas" class="hover:text-brasil-yellow transition">Minha Aposta</a>
+          <a href="/apostas" class="nav-link">Minha Aposta</a>
           <% if (user.isAdmin) { %>
-            <a href="/admin" class="bg-brasil-yellow text-brasil-blue px-3 py-1 rounded font-semibold hover:bg-yellow-300 transition">Admin</a>
+            <a href="/admin" class="btn-copa btn-admin">Admin</a>
           <% } %>
-          <div class="flex items-center gap-2 ml-2 border-l border-blue-400 pl-4">
-            <span class="text-brasil-yellow"><%= user.nome %></span>
-            <a href="/logout" class="text-gray-300 hover:text-white text-xs">(sair)</a>
+          <div class="flex items-center gap-2 ml-2 border-l border-gray-600 pl-4">
+            <span class="text-copa-teal font-semibold text-sm"><%= user.nome %></span>
+            <a href="/logout" class="text-gray-500 hover:text-gray-300 text-xs transition">(sair)</a>
           </div>
         <% } else { %>
-          <a href="/login" class="bg-brasil-yellow text-brasil-blue px-3 py-1 rounded font-semibold hover:bg-yellow-300 transition">Entrar</a>
+          <a href="/login" class="btn-copa btn-teal text-sm !py-2 !px-5">Entrar</a>
         <% } %>
       </div>
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2 text-sm">
-      <a href="/" class="block py-1 hover:text-brasil-yellow">Início</a>
-      <a href="/ranking" class="block py-1 hover:text-brasil-yellow">Ranking</a>
-      <a href="/convocacao" class="block py-1 hover:text-brasil-yellow">Convocação</a>
-      <a href="/estatisticas" class="block py-1 hover:text-brasil-yellow">Estatísticas</a>
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-1 mobile-menu">
+      <a href="/" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Início</a>
+      <a href="/ranking" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Ranking</a>
+      <a href="/convocacao" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Convocação</a>
+      <a href="/estatisticas" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Estatísticas</a>
       <% if (user) { %>
-        <a href="/apostas" class="block py-1 hover:text-brasil-yellow">Minha Aposta</a>
+        <a href="/apostas" class="block py-2 px-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Minha Aposta</a>
         <% if (user.isAdmin) { %>
-          <a href="/admin" class="block py-1 text-brasil-yellow font-semibold">Admin</a>
+          <a href="/admin" class="block py-2 px-3 rounded-lg text-copa-orange font-semibold">Admin</a>
         <% } %>
-        <div class="pt-2 border-t border-blue-400 flex items-center justify-between">
-          <span class="text-brasil-yellow"><%= user.nome %></span>
-          <a href="/logout" class="text-gray-300 hover:text-white text-xs">(sair)</a>
+        <div class="pt-3 mt-2 border-t border-gray-700 flex items-center justify-between px-3">
+          <span class="text-copa-teal font-semibold"><%= user.nome %></span>
+          <a href="/logout" class="text-gray-500 hover:text-gray-300 text-xs transition">(sair)</a>
         </div>
       <% } else { %>
-        <a href="/login" class="block py-1 text-brasil-yellow font-semibold">Entrar</a>
+        <a href="/login" class="block py-2 px-3 rounded-lg text-copa-teal font-semibold">Entrar</a>
       <% } %>
     </div>
   </nav>
+
   <main class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">

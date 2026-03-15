@@ -1,10 +1,10 @@
 <%- include('../partials/header') %>
 
-<div class="max-w-2xl mx-auto">
-  <h1 class="text-2xl font-bold text-brasil-blue mb-2">Aposta de <%= usuario.nome %></h1>
+<div class="max-w-2xl mx-auto animate-fade-in-up">
+  <h1 class="text-2xl font-bold text-copa-dark mb-2">Aposta de <%= usuario.nome %></h1>
   <p class="text-sm text-gray-500 mb-6">
     Status pagamento:
-    <span class="<%= usuario.status_pagamento === 'pago' ? 'text-green-600' : 'text-red-600' %> font-semibold">
+    <span class="<%= usuario.status_pagamento === 'pago' ? 'text-emerald-600' : 'text-copa-coral' %> font-semibold">
       <%= usuario.status_pagamento === 'pago' ? 'Pago' : 'Pendente' %>
     </span>
   </p>
@@ -12,9 +12,9 @@
   <% if (jogadoresAposta.length === 0) { %>
     <p class="text-gray-500">Este participante ainda não enviou sua aposta.</p>
   <% } else { %>
-    <div class="bg-white rounded-xl shadow overflow-hidden">
-      <table class="w-full">
-        <thead class="bg-brasil-blue text-white">
+    <div class="card-copa overflow-hidden">
+      <table class="w-full table-copa">
+        <thead>
           <tr>
             <th class="text-left px-4 py-2">#</th>
             <th class="text-left px-4 py-2">Jogador</th>
@@ -26,7 +26,7 @@
         <tbody>
           <% jogadoresAposta.forEach((jogador, i) => { %>
             <% const acertou = jogadoresConvocados.includes(jogador); %>
-            <tr class="border-b <%= acertou ? 'bg-green-50' : '' %>">
+            <tr class="border-b <%= acertou ? 'bg-emerald-50' : '' %>">
               <td class="px-4 py-2 text-gray-500"><%= i + 1 %></td>
               <td class="px-4 py-2 font-medium"><%= jogador %></td>
               <% if (jogadoresConvocados.length > 0) { %>
@@ -41,7 +41,7 @@
     </div>
 
     <% if (jogadoresConvocados.length > 0) { %>
-      <div class="mt-4 text-center text-lg font-semibold text-brasil-blue">
+      <div class="mt-4 text-center text-lg font-semibold text-copa-dark">
         Acertos: <%= jogadoresAposta.filter(j => jogadoresConvocados.includes(j)).length %> / 26
         &mdash;
         Pontuação: <%= jogadoresAposta.filter(j => jogadoresConvocados.includes(j)).length * 10 %> pts
@@ -50,7 +50,7 @@
   <% } %>
 
   <div class="mt-6 text-center">
-    <a href="/ranking" class="text-brasil-blue hover:underline">Voltar ao ranking</a>
+    <a href="/ranking" class="text-copa-dark hover:underline">Voltar ao ranking</a>
   </div>
 </div>
 

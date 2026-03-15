@@ -1,24 +1,418 @@
-/* Estilos customizados ConvocaKeeta */
-body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+/* ========== ConvocaKeeta - Copa 2026 Key Visual ========== */
+
+:root {
+  --teal: #2EC4B6;
+  --teal-dark: #1A9E92;
+  --purple: #7B2D8E;
+  --purple-light: #9B6EB7;
+  --coral: #E63946;
+  --coral-dark: #C62D3A;
+  --lime: #A8D948;
+  --lime-dark: #8DBF2E;
+  --lavender: #9B8EC1;
+  --orange: #FF6B35;
+  --blue: #4361EE;
+  --dark: #1A1A2E;
+  --dark-light: #2D2D44;
+  --light: #F8F9FA;
+  --gray-100: #F1F3F5;
+  --gray-200: #E9ECEF;
+  --gray-300: #DEE2E6;
+  --gray-500: #ADB5BD;
+  --gray-700: #495057;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+}
+
+/* ========== Gradient Background ========== */
+.bg-copa-gradient {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--coral) 50%, var(--orange) 100%);
+}
+
+.bg-copa-gradient-alt {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 50%, var(--purple) 100%);
+}
+
+.bg-copa-dark {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.4); }
+  50% { box-shadow: 0 0 20px 5px rgba(46, 196, 182, 0.2); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* ========== Header / Nav ========== */
+.nav-copa {
+  background: linear-gradient(135deg, var(--dark) 0%, #16213E 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--teal), var(--purple), var(--coral), var(--lime)) 1;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-copa .logo {
+  font-weight: 800;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--teal), var(--lime));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.nav-copa .logo:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--gray-300);
+  transition: color 0.3s ease;
+  padding: 4px 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--lime));
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ========== Buttons ========== */
+.btn-copa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-copa::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-copa:hover::before {
+  opacity: 1;
+}
+
+.btn-copa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.btn-copa:active {
+  transform: translateY(0);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: white;
+}
+
+.btn-teal:hover {
+  box-shadow: 0 8px 25px -5px rgba(46, 196, 182, 0.4);
+}
+
+.btn-coral {
+  background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+  color: white;
+}
+
+.btn-coral:hover {
+  box-shadow: 0 8px 25px -5px rgba(230, 57, 70, 0.4);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  color: white;
+}
+
+.btn-purple:hover {
+  box-shadow: 0 8px 25px -5px rgba(123, 45, 142, 0.4);
+}
+
+.btn-lime {
+  background: linear-gradient(135deg, var(--lime), var(--lime-dark));
+  color: var(--dark);
+}
+
+.btn-admin {
+  background: linear-gradient(135deg, var(--orange), var(--coral));
+  color: white;
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.btn-admin:hover {
+  box-shadow: 0 4px 15px -3px rgba(255, 107, 53, 0.5);
+}
+
+/* ========== Cards ========== */
+.card-copa {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+
+.card-copa:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  transform: translateY(-2px);
+}
+
+.card-copa-color {
+  position: relative;
+}
+
+.card-copa-color::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+
+.card-teal::before { background: linear-gradient(90deg, var(--teal), var(--lime)); }
+.card-purple::before { background: linear-gradient(90deg, var(--purple), var(--lavender)); }
+.card-coral::before { background: linear-gradient(90deg, var(--coral), var(--orange)); }
+.card-blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+
+/* ========== Hero section ========== */
+.hero-copa {
+  background: linear-gradient(135deg, var(--dark) 0%, #16213E 40%, var(--purple) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-copa::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(46, 196, 182, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-copa::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* ========== Stat cards ========== */
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-number.coral {
+  background: linear-gradient(135deg, var(--coral), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.stat-number.purple {
+  background: linear-gradient(135deg, var(--purple), var(--lavender));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ========== Countdown ========== */
+.countdown-box {
+  background: linear-gradient(135deg, var(--dark), var(--dark-light));
+  border: 1px solid rgba(46, 196, 182, 0.2);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.countdown-number {
+  font-size: 2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, var(--teal), var(--lime));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Badge / Tags ========== */
+.badge-pago {
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.15), rgba(46, 196, 182, 0.05));
+  color: var(--teal-dark);
+  border: 1px solid rgba(46, 196, 182, 0.3);
+}
+
+.badge-pendente {
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(230, 57, 70, 0.05));
+  color: var(--coral);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+}
+
+/* ========== Table ========== */
+.table-copa thead {
+  background: linear-gradient(135deg, var(--dark), var(--dark-light));
+  color: white;
+}
+
+.table-copa thead th {
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 16px;
+}
+
+.table-copa tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table-copa tbody tr:hover {
+  background-color: rgba(46, 196, 182, 0.04);
+}
+
+/* ========== Form inputs ========== */
+.input-copa {
+  border: 2px solid var(--gray-300);
+  border-radius: 12px;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
+  background: white;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.input-copa:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.15);
+}
+
+/* ========== Jogador items (apostas) ========== */
 .jogador-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
 
 .jogador-item:hover {
-  background-color: #f3f4f6;
+  background: rgba(46, 196, 182, 0.06);
+  border-color: rgba(46, 196, 182, 0.15);
 }
 
 .jogador-item.selecionado {
-  background-color: #dcfce7;
+  background: rgba(46, 196, 182, 0.08);
+  border-color: rgba(46, 196, 182, 0.2);
   cursor: default;
 }
 
@@ -26,20 +420,89 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px;
-  background-color: #eff6ff;
-  border-radius: 8px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.06), rgba(67, 97, 238, 0.04));
+  border: 1px solid rgba(46, 196, 182, 0.15);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  animation: fadeInUp 0.3s ease-out both;
+}
+
+.jogador-selecionado:hover {
+  border-color: rgba(46, 196, 182, 0.3);
 }
 
 .jogador-selecionado .remover {
-  color: #ef4444;
+  color: var(--coral);
   cursor: pointer;
   font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 4px;
-  transition: background-color 0.15s;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
 }
 
 .jogador-selecionado .remover:hover {
-  background-color: #fee2e2;
+  background: rgba(230, 57, 70, 0.1);
+}
+
+/* ========== Progress bars ========== */
+.progress-bar-copa {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--gray-200);
+  overflow: hidden;
+}
+
+.progress-bar-copa .fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--lime));
+  transition: width 0.5s ease;
+}
+
+/* ========== Podium ========== */
+.podium-1 { background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.02)); border: 1px solid rgba(255, 215, 0, 0.3); }
+.podium-2 { background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.02)); border: 1px solid rgba(192, 192, 192, 0.3); }
+.podium-3 { background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), rgba(205, 127, 50, 0.02)); border: 1px solid rgba(205, 127, 50, 0.3); }
+
+/* ========== Mobile menu animation ========== */
+.mobile-menu {
+  animation: slideDown 0.3s ease-out both;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+/* ========== Copa 2026 decorative ========== */
+.copa-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--purple), var(--coral), var(--orange), var(--lime));
+  background-size: 200% 100%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ========== Logo image ========== */
+.copa-logo {
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copa-logo:hover {
+  transform: scale(1.05) rotate(2deg);
 }

@@ -1,85 +1,87 @@
 <%- include('partials/header') %>
 
-<h1 class="text-2xl font-bold text-brasil-blue mb-6">Estatísticas</h1>
+<div class="animate-fade-in-up">
+  <h1 class="text-2xl font-bold text-copa-dark mb-6">Estatísticas</h1>
 
-<% if (totalApostas === 0) { %>
-  <p class="text-gray-500">Nenhuma aposta registrada ainda.</p>
-<% } else { %>
+  <% if (totalApostas === 0) { %>
+    <p class="text-gray-500">Nenhuma aposta registrada ainda.</p>
+  <% } else { %>
 
-  <div class="grid md:grid-cols-2 gap-6 mb-8">
-    <div class="bg-white rounded-xl shadow p-6 text-center">
-      <div class="text-3xl font-bold text-brasil-blue"><%= totalApostas %></div>
-      <div class="text-gray-600">Total de apostas</div>
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="card-copa p-6 text-center">
+        <div class="text-3xl font-bold text-copa-dark"><%= totalApostas %></div>
+        <div class="text-gray-600">Total de apostas</div>
+      </div>
+      <% if (temConvocacao) { %>
+        <div class="card-copa p-6 text-center">
+          <div class="text-3xl font-bold text-copa-teal"><%= mediaAcertos %></div>
+          <div class="text-gray-600">Média de acertos</div>
+        </div>
+      <% } %>
     </div>
-    <% if (temConvocacao) { %>
-      <div class="bg-white rounded-xl shadow p-6 text-center">
-        <div class="text-3xl font-bold text-brasil-green"><%= mediaAcertos %></div>
-        <div class="text-gray-600">Média de acertos</div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Mais apostados -->
+      <div class="card-copa p-6">
+        <h2 class="text-lg font-semibold text-copa-dark mb-4">Jogadores mais apostados</h2>
+        <div class="space-y-2">
+          <% maisApostados.forEach((j, i) => { %>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-400 w-6"><%= i + 1 %>.</span>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-sm font-medium"><%= j.nome %></span>
+                  <span class="text-xs text-gray-500"><%= j.total %> (<%= j.percentual %>%)</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-copa-teal rounded-full h-2" style="width: <%= j.percentual %>%"></div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <!-- Menos apostados -->
+      <div class="card-copa p-6">
+        <h2 class="text-lg font-semibold text-copa-dark mb-4">Jogadores menos apostados</h2>
+        <div class="space-y-2">
+          <% menosApostados.forEach((j, i) => { %>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-400 w-6"><%= i + 1 %>.</span>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-sm font-medium"><%= j.nome %></span>
+                  <span class="text-xs text-gray-500"><%= j.total %> (<%= j.percentual %>%)</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-copa-coral rounded-full h-2" style="width: <%= j.percentual %>%"></div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <% if (temConvocacao && distribuicaoAcertos.length > 0) { %>
+      <div class="card-copa p-6 mt-6">
+        <h2 class="text-lg font-semibold text-copa-dark mb-4">Distribuição de acertos</h2>
+        <div class="flex items-end gap-2 h-40">
+          <% const maxDist = Math.max(...distribuicaoAcertos.map(d => d.total)); %>
+          <% distribuicaoAcertos.forEach(d => { %>
+            <div class="flex-1 flex flex-col items-center">
+              <span class="text-xs text-gray-500 mb-1"><%= d.total %></span>
+              <div class="w-full bg-copa-purple rounded-t" style="height: <%= (d.total / maxDist) * 100 %>%"></div>
+              <span class="text-xs text-gray-500 mt-1"><%= d.acertos %></span>
+            </div>
+          <% }) %>
+        </div>
+        <p class="text-center text-xs text-gray-400 mt-1">Número de acertos</p>
       </div>
     <% } %>
-  </div>
 
-  <div class="grid md:grid-cols-2 gap-6">
-    <!-- Mais apostados -->
-    <div class="bg-white rounded-xl shadow p-6">
-      <h2 class="text-lg font-semibold text-brasil-blue mb-4">Jogadores mais apostados</h2>
-      <div class="space-y-2">
-        <% maisApostados.forEach((j, i) => { %>
-          <div class="flex items-center gap-3">
-            <span class="text-sm text-gray-400 w-6"><%= i + 1 %>.</span>
-            <div class="flex-1">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-medium"><%= j.nome %></span>
-                <span class="text-xs text-gray-500"><%= j.total %> (<%= j.percentual %>%)</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-brasil-green rounded-full h-2" style="width: <%= j.percentual %>%"></div>
-              </div>
-            </div>
-          </div>
-        <% }) %>
-      </div>
-    </div>
-
-    <!-- Menos apostados -->
-    <div class="bg-white rounded-xl shadow p-6">
-      <h2 class="text-lg font-semibold text-brasil-blue mb-4">Jogadores menos apostados</h2>
-      <div class="space-y-2">
-        <% menosApostados.forEach((j, i) => { %>
-          <div class="flex items-center gap-3">
-            <span class="text-sm text-gray-400 w-6"><%= i + 1 %>.</span>
-            <div class="flex-1">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-medium"><%= j.nome %></span>
-                <span class="text-xs text-gray-500"><%= j.total %> (<%= j.percentual %>%)</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-brasil-yellow rounded-full h-2" style="width: <%= j.percentual %>%"></div>
-              </div>
-            </div>
-          </div>
-        <% }) %>
-      </div>
-    </div>
-  </div>
-
-  <% if (temConvocacao && distribuicaoAcertos.length > 0) { %>
-    <div class="bg-white rounded-xl shadow p-6 mt-6">
-      <h2 class="text-lg font-semibold text-brasil-blue mb-4">Distribuição de acertos</h2>
-      <div class="flex items-end gap-2 h-40">
-        <% const maxDist = Math.max(...distribuicaoAcertos.map(d => d.total)); %>
-        <% distribuicaoAcertos.forEach(d => { %>
-          <div class="flex-1 flex flex-col items-center">
-            <span class="text-xs text-gray-500 mb-1"><%= d.total %></span>
-            <div class="w-full bg-brasil-blue rounded-t" style="height: <%= (d.total / maxDist) * 100 %>%"></div>
-            <span class="text-xs text-gray-500 mt-1"><%= d.acertos %></span>
-          </div>
-        <% }) %>
-      </div>
-      <p class="text-center text-xs text-gray-400 mt-1">Número de acertos</p>
-    </div>
   <% } %>
-
-<% } %>
+</div>
 
 <%- include('partials/footer') %>
