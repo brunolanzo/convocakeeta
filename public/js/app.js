@@ -1,3 +1,20 @@
+// ========== Scroll Reveal (IntersectionObserver) ==========
+(function() {
+  const els = document.querySelectorAll('.animate-fade-in-up');
+  if (!els.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  els.forEach(el => observer.observe(el));
+})();
+
 // ========== Countdown na Home ==========
 const countdownEl = document.getElementById('countdown');
 if (countdownEl) {

@@ -83,6 +83,11 @@ body {
 }
 
 .animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-fade-in-up.visible {
   animation: fadeInUp 0.6s ease-out both;
 }
 
@@ -373,6 +378,9 @@ body {
 .preview-player {
   opacity: 0;
   transform: translateX(-10px);
+}
+
+.visible .preview-player {
   animation: revealPlayer 0.4s ease-out forwards;
 }
 
@@ -387,6 +395,10 @@ body {
 
 /* Progress bar animation */
 .progress-animate {
+  width: 0 !important;
+}
+
+.visible .progress-animate {
   animation: growBar 2.5s ease-out forwards;
 }
 
@@ -409,8 +421,11 @@ body {
 /* Rank bar animations */
 .rank-bar {
   transform-origin: bottom;
-  animation: growUp 0.6s ease-out forwards;
   transform: scaleY(0);
+}
+
+.visible .rank-bar {
+  animation: growUp 0.6s ease-out forwards;
 }
 
 .rank-bar-1 { animation-delay: 0.6s; }
@@ -424,6 +439,9 @@ body {
 /* Rank rows */
 .rank-row {
   opacity: 0;
+}
+
+.visible .rank-row {
   animation: fadeInUp 0.3s ease-out forwards;
 }
 
@@ -433,6 +451,10 @@ body {
 
 /* Stat bars animation */
 .stat-bar {
+  width: 0;
+}
+
+.visible .stat-bar {
   animation: growStatBar 0.8s ease-out forwards;
 }
 
