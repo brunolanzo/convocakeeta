@@ -271,7 +271,71 @@ body {
 .card-coral::before { background: linear-gradient(90deg, var(--coral), var(--orange)); }
 .card-blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
 
-/* ========== Hero section ========== */
+/* ========== Hero section (Ancelotti) ========== */
+.hero-ancelotti {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-img-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(26, 26, 46, 0.92) 0%,
+    rgba(26, 26, 46, 0.75) 40%,
+    rgba(26, 26, 46, 0.3) 70%,
+    rgba(123, 45, 142, 0.2) 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .hero-ancelotti { min-height: 360px; }
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 26, 46, 0.6) 0%,
+      rgba(26, 26, 46, 0.85) 60%,
+      rgba(26, 26, 46, 0.95) 100%
+    );
+  }
+}
+
+.hero-badge {
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.2), rgba(168, 217, 72, 0.15));
+  color: var(--teal);
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  backdrop-filter: blur(6px);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ========== Legacy hero (fallback) ========== */
 .hero-copa {
   background: linear-gradient(135deg, var(--dark) 0%, #16213E 40%, var(--purple) 100%);
   position: relative;
@@ -298,6 +362,115 @@ body {
   height: 400px;
   background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
   border-radius: 50%;
+}
+
+/* ========== Preview Cards (Home) ========== */
+.preview-card {
+  border: 1px solid var(--gray-200);
+}
+
+.preview-card:hover {
+  border-color: rgba(46, 196, 182, 0.3);
+}
+
+.preview-card:hover .preview-card-screen {
+  transform: scale(1.01);
+}
+
+.preview-card-screen {
+  transition: transform 0.3s ease;
+  min-height: 200px;
+}
+
+/* Player reveal animations */
+.preview-player {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: revealPlayer 0.4s ease-out forwards;
+}
+
+.preview-player-1 { animation-delay: 0.5s; }
+.preview-player-2 { animation-delay: 1s; }
+.preview-player-3 { animation-delay: 1.5s; }
+.preview-player-4 { animation-delay: 2s; }
+
+@keyframes revealPlayer {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Progress bar animation */
+.progress-animate {
+  animation: growBar 2.5s ease-out forwards;
+}
+
+@keyframes growBar {
+  from { width: 0; }
+}
+
+/* Typing cursor animation */
+.typing-animation::after {
+  content: '|';
+  animation: blink-cursor 0.8s step-end infinite;
+  color: var(--teal);
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Rank bar animations */
+.rank-bar {
+  transform-origin: bottom;
+  animation: growUp 0.6s ease-out forwards;
+  transform: scaleY(0);
+}
+
+.rank-bar-1 { animation-delay: 0.6s; }
+.rank-bar-2 { animation-delay: 0.3s; }
+.rank-bar-3 { animation-delay: 0.9s; }
+
+@keyframes growUp {
+  to { transform: scaleY(1); }
+}
+
+/* Rank rows */
+.rank-row {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.rank-row-1 { animation-delay: 1.2s; }
+.rank-row-2 { animation-delay: 1.4s; }
+.rank-row-3 { animation-delay: 1.6s; }
+
+/* Stat bars animation */
+.stat-bar {
+  animation: growStatBar 0.8s ease-out forwards;
+}
+
+.stat-bar-1 { animation-delay: 0.3s; --target-width: 95%; }
+.stat-bar-2 { animation-delay: 0.5s; --target-width: 88%; }
+.stat-bar-3 { animation-delay: 0.7s; --target-width: 82%; }
+.stat-bar-4 { animation-delay: 0.9s; --target-width: 76%; }
+
+@keyframes growStatBar {
+  to { width: var(--target-width); }
+}
+
+/* Spinning donut chart */
+.spin-slow {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Counter simulation */
+.counter-sim {
+  animation: countUp 2s ease-out forwards;
 }
 
 /* ========== Stat cards ========== */
