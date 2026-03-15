@@ -1,0 +1,45 @@
+/* Estilos customizados ConvocaKeeta */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.jogador-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.jogador-item:hover {
+  background-color: #f3f4f6;
+}
+
+.jogador-item.selecionado {
+  background-color: #dcfce7;
+  cursor: default;
+}
+
+.jogador-selecionado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background-color: #eff6ff;
+  border-radius: 8px;
+}
+
+.jogador-selecionado .remover {
+  color: #ef4444;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.jogador-selecionado .remover:hover {
+  background-color: #fee2e2;
+}

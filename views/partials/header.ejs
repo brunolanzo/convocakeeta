@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvocaKeeta - Bolão Copa 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brasil: { green: '#009c3b', yellow: '#ffdf00', blue: '#002776' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <nav class="bg-brasil-blue text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold">
+        <span class="text-brasil-yellow">ConvocaKeeta</span>
+      </a>
+
+      <!-- Hamburger mobile -->
+      <button id="menuToggle" class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Desktop menu -->
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <a href="/" class="hover:text-brasil-yellow transition">Início</a>
+        <a href="/ranking" class="hover:text-brasil-yellow transition">Ranking</a>
+        <a href="/convocacao" class="hover:text-brasil-yellow transition">Convocação</a>
+        <a href="/estatisticas" class="hover:text-brasil-yellow transition">Estatísticas</a>
+        <% if (user) { %>
+          <a href="/apostas" class="hover:text-brasil-yellow transition">Minha Aposta</a>
+          <% if (user.isAdmin) { %>
+            <a href="/admin" class="bg-brasil-yellow text-brasil-blue px-3 py-1 rounded font-semibold hover:bg-yellow-300 transition">Admin</a>
+          <% } %>
+          <div class="flex items-center gap-2 ml-2 border-l border-blue-400 pl-4">
+            <span class="text-brasil-yellow"><%= user.nome %></span>
+            <a href="/logout" class="text-gray-300 hover:text-white text-xs">(sair)</a>
+          </div>
+        <% } else { %>
+          <a href="/login" class="bg-brasil-yellow text-brasil-blue px-3 py-1 rounded font-semibold hover:bg-yellow-300 transition">Entrar</a>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-2 text-sm">
+      <a href="/" class="block py-1 hover:text-brasil-yellow">Início</a>
+      <a href="/ranking" class="block py-1 hover:text-brasil-yellow">Ranking</a>
+      <a href="/convocacao" class="block py-1 hover:text-brasil-yellow">Convocação</a>
+      <a href="/estatisticas" class="block py-1 hover:text-brasil-yellow">Estatísticas</a>
+      <% if (user) { %>
+        <a href="/apostas" class="block py-1 hover:text-brasil-yellow">Minha Aposta</a>
+        <% if (user.isAdmin) { %>
+          <a href="/admin" class="block py-1 text-brasil-yellow font-semibold">Admin</a>
+        <% } %>
+        <div class="pt-2 border-t border-blue-400 flex items-center justify-between">
+          <span class="text-brasil-yellow"><%= user.nome %></span>
+          <a href="/logout" class="text-gray-300 hover:text-white text-xs">(sair)</a>
+        </div>
+      <% } else { %>
+        <a href="/login" class="block py-1 text-brasil-yellow font-semibold">Entrar</a>
+      <% } %>
+    </div>
+  </nav>
+  <main class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">

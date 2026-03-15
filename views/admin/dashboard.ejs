@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<h1 class="text-2xl font-bold text-brasil-blue mb-6">Painel Administrativo</h1>
+
+<div class="grid md:grid-cols-4 gap-4 mb-8">
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <div class="text-2xl font-bold text-brasil-blue"><%= totalUsuarios %></div>
+    <div class="text-sm text-gray-600">Participantes</div>
+  </div>
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <div class="text-2xl font-bold text-brasil-green"><%= totalApostas %></div>
+    <div class="text-sm text-gray-600">Apostas enviadas</div>
+  </div>
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <div class="text-2xl font-bold text-green-600"><%= totalPagos %></div>
+    <div class="text-sm text-gray-600">Pagamentos confirmados</div>
+  </div>
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <div class="text-2xl font-bold <%= convocacaoPublicada ? 'text-green-600' : 'text-red-600' %>">
+      <%= convocacaoPublicada ? 'Sim' : 'Não' %>
+    </div>
+    <div class="text-sm text-gray-600">Convocação publicada</div>
+  </div>
+</div>
+
+<!-- Alterar prazo -->
+<div class="bg-white rounded-xl shadow p-6 mb-6">
+  <h2 class="text-lg font-semibold mb-3">Prazo das apostas</h2>
+  <form method="POST" action="/admin/prazo" class="flex gap-3 items-end">
+    <div class="flex-1">
+      <label class="block text-sm text-gray-600 mb-1">Data e hora limite</label>
+      <input type="datetime-local" name="prazo" value="<%= prazo ? prazo.replace(' ', 'T').substring(0, 16) : '' %>"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brasil-blue">
+    </div>
+    <button type="submit" class="bg-brasil-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">Salvar</button>
+  </form>
+</div>
+
+<!-- Links rápidos -->
+<div class="grid md:grid-cols-2 gap-4">
+  <a href="/admin/convocacao" class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition block">
+    <h3 class="text-lg font-semibold text-brasil-blue mb-1">Convocação Oficial</h3>
+    <p class="text-sm text-gray-600">Cadastrar ou editar a lista de 26 convocados</p>
+  </a>
+  <a href="/admin/pagamentos" class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition block">
+    <h3 class="text-lg font-semibold text-brasil-blue mb-1">Pagamentos</h3>
+    <p class="text-sm text-gray-600">Gerenciar status de pagamento dos participantes</p>
+  </a>
+</div>
+
+<%- include('../partials/footer') %>

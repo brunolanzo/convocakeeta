@@ -1,0 +1,67 @@
+<%- include('partials/header') %>
+
+<div class="text-center mb-10">
+  <h1 class="text-4xl font-bold text-brasil-blue mb-2">Bolão da Convocação</h1>
+  <p class="text-xl text-gray-600">Copa do Mundo 2026 - Seleção Brasileira</p>
+</div>
+
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-green">
+    <div class="text-3xl font-bold text-brasil-green mb-1">26</div>
+    <div class="text-gray-600">Jogadores para escolher</div>
+  </div>
+  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-yellow">
+    <div class="text-3xl font-bold text-brasil-blue mb-1">260</div>
+    <div class="text-gray-600">Pontuação máxima</div>
+  </div>
+  <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-brasil-blue">
+    <div class="text-3xl font-bold text-brasil-blue mb-1"><%= totalParticipantes %></div>
+    <div class="text-gray-600">Participantes</div>
+  </div>
+</div>
+
+<% if (prazo) { %>
+<div class="bg-white rounded-xl shadow p-6 mb-10 text-center">
+  <h2 class="text-lg font-semibold text-gray-700 mb-2">Prazo para enviar sua aposta</h2>
+  <div id="countdown" class="text-3xl font-bold text-brasil-blue" data-prazo="<%= prazo %>"></div>
+  <p class="text-sm text-gray-500 mt-2"><%= new Date(prazo).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) %></p>
+</div>
+<% } %>
+
+<div class="bg-white rounded-xl shadow p-6 mb-10">
+  <h2 class="text-2xl font-bold text-brasil-blue mb-4">Regras</h2>
+  <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+    <div>
+      <h3 class="font-semibold mb-2">Como funciona</h3>
+      <ul class="list-disc list-inside space-y-1 text-sm">
+        <li>Escolha <strong>exatamente 26 jogadores</strong> para a convocação</li>
+        <li>Cada jogador correto vale <strong>10 pontos</strong></li>
+        <li>Pontuação máxima: <strong>260 pontos</strong></li>
+        <li>Apostas podem ser editadas até o prazo final</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">Critérios de desempate</h3>
+      <ol class="list-decimal list-inside space-y-1 text-sm">
+        <li><strong>Pontuação total</strong> (maior primeiro)</li>
+        <li><strong>Índice de jogador inusitado</strong> (maior primeiro)</li>
+        <li><strong>Sorteio automático</strong></li>
+      </ol>
+      <p class="text-xs text-gray-500 mt-2">O índice inusitado premia quem acertou jogadores que poucos apostaram.</p>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <% if (user) { %>
+    <a href="/apostas" class="inline-block bg-brasil-green text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
+      Fazer minha aposta
+    </a>
+  <% } else { %>
+    <a href="/registro" class="inline-block bg-brasil-green text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
+      Cadastrar e participar
+    </a>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
