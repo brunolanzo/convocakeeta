@@ -1,24 +1,20 @@
 <%- include('partials/header') %>
 
-<!-- Hero Section com foto do Ancelotti -->
-<section class="hero-ancelotti -mx-4 -mt-8 mb-12 relative overflow-hidden">
-  <div class="hero-img-wrapper">
-    <img src="/img/ancelotti-header.jpg" alt="Carlo Ancelotti - Seleção Brasileira" class="hero-img">
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-content relative z-10 px-4 py-16 md:py-24 max-w-4xl mx-auto">
+<!-- Hero Section Clean -->
+<section class="hero-clean -mx-4 -mt-8 mb-12 relative overflow-hidden">
+  <div class="hero-clean-content relative z-10 px-4 py-20 md:py-28 max-w-3xl mx-auto text-center">
     <div class="animate-fade-in-up">
-      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 hero-badge">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-5 hero-badge">
         Copa do Mundo 2026
       </span>
     </div>
-    <h1 class="text-4xl md:text-6xl font-black text-white mb-3 animate-fade-in-up animate-delay-100 leading-tight">
-      Bolão da<br>Convocação
+    <h1 class="text-5xl md:text-7xl font-black text-white mb-4 animate-fade-in-up animate-delay-100 leading-[1.1]">
+      Bolão da Convocação
     </h1>
-    <p class="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up animate-delay-200 max-w-lg">
+    <p class="text-lg md:text-xl text-gray-400 mb-10 animate-fade-in-up animate-delay-200 max-w-xl mx-auto">
       Monte sua seleção dos 26 convocados e dispute com seus amigos.
     </p>
-    <div class="flex flex-wrap gap-3 animate-fade-in-up animate-delay-300">
+    <div class="flex flex-wrap gap-3 justify-center animate-fade-in-up animate-delay-300">
       <% if (user) { %>
         <a href="/apostas" class="btn-copa btn-teal text-lg">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
@@ -73,8 +69,8 @@
 <div class="grid md:grid-cols-3 gap-6 mb-12">
 
   <!-- Card 1: Aposta na Escalação -->
-  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-100 cursor-pointer group" onclick="window.location='/apostas'">
-    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden">
+  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-100 cursor-pointer group flex flex-col" onclick="window.location='/apostas'">
+    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden flex-shrink-0">
       <div class="preview-card-header flex items-center gap-2 mb-3">
         <div class="w-2 h-2 rounded-full bg-red-400"></div>
         <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -122,15 +118,15 @@
         </div>
       </div>
     </div>
-    <div class="p-5">
+    <div class="p-5 flex-1 flex flex-col justify-center">
       <h3 class="font-bold text-copa-dark text-lg mb-1 group-hover:text-copa-teal transition">Monte sua Escalação</h3>
       <p class="text-gray-500 text-sm">Escolha 26 jogadores entre goleiros, defensores, meias e atacantes para sua convocação.</p>
     </div>
   </div>
 
   <!-- Card 2: Ranking -->
-  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-200 cursor-pointer group" onclick="window.location='/ranking'">
-    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden">
+  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-200 cursor-pointer group flex flex-col" onclick="window.location='/ranking'">
+    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden flex-shrink-0">
       <div class="preview-card-header flex items-center gap-2 mb-3">
         <div class="w-2 h-2 rounded-full bg-red-400"></div>
         <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -172,15 +168,15 @@
         </div>
       </div>
     </div>
-    <div class="p-5">
+    <div class="p-5 flex-1 flex flex-col justify-center">
       <h3 class="font-bold text-copa-dark text-lg mb-1 group-hover:text-copa-teal transition">Acompanhe o Ranking</h3>
       <p class="text-gray-500 text-sm">Veja quem está na frente, compare pontuações e acompanhe o critério de desempate inusitado.</p>
     </div>
   </div>
 
   <!-- Card 3: Estatísticas -->
-  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-300 cursor-pointer group" onclick="window.location='/estatisticas'">
-    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden">
+  <div class="preview-card card-copa p-0 animate-fade-in-up animate-delay-300 cursor-pointer group flex flex-col" onclick="window.location='/estatisticas'">
+    <div class="preview-card-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-t-2xl relative overflow-hidden flex-shrink-0">
       <div class="preview-card-header flex items-center gap-2 mb-3">
         <div class="w-2 h-2 rounded-full bg-red-400"></div>
         <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -238,7 +234,7 @@
         </div>
       </div>
     </div>
-    <div class="p-5">
+    <div class="p-5 flex-1 flex flex-col justify-center">
       <h3 class="font-bold text-copa-dark text-lg mb-1 group-hover:text-copa-teal transition">Explore Estatísticas</h3>
       <p class="text-gray-500 text-sm">Descubra os jogadores mais apostados, posições favoritas e tendências do bolão.</p>
     </div>
