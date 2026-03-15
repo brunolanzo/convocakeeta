@@ -363,7 +363,10 @@ body {
 
 .preview-card-screen {
   transition: transform 0.3s ease;
-  min-height: 200px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Player reveal animations */
