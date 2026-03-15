@@ -62,6 +62,44 @@
 </div>
 <% } %>
 
+<!-- Premiação -->
+<% const premioTotal = totalParticipantes * 47; %>
+<div class="card-copa p-0 mb-12 overflow-hidden animate-fade-in-up" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+  <div class="p-6 md:p-8">
+    <div class="text-center mb-6">
+      <span class="text-3xl mb-2 block">🏆</span>
+      <h2 class="text-2xl md:text-3xl font-black text-white">Premiação</h2>
+      <p class="text-gray-400 text-sm mt-1"><%= totalParticipantes %> participante<%= totalParticipantes !== 1 ? 's' : '' %> &bull; Prêmio total: <span class="text-copa-teal font-bold">R$ <%= premioTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></span></p>
+    </div>
+    <div class="grid grid-cols-3 gap-3 md:gap-6">
+      <!-- 1º Lugar -->
+      <div class="text-center relative">
+        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center mb-3 shadow-lg shadow-amber-500/20">
+          <span class="text-2xl md:text-3xl font-black text-white">1º</span>
+        </div>
+        <div class="text-2xl md:text-3xl font-black text-amber-400 mb-1">R$ <%= Math.floor(premioTotal * 0.7).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></div>
+        <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">70% do prêmio</div>
+      </div>
+      <!-- 2º Lugar -->
+      <div class="text-center relative">
+        <div class="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center mb-3 shadow-lg shadow-gray-400/20">
+          <span class="text-xl md:text-2xl font-black text-white">2º</span>
+        </div>
+        <div class="text-xl md:text-2xl font-black text-gray-300 mb-1">R$ <%= Math.floor(premioTotal * 0.2).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></div>
+        <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">20% do prêmio</div>
+      </div>
+      <!-- 3º Lugar -->
+      <div class="text-center relative">
+        <div class="w-12 h-12 md:w-14 md:h-14 mx-auto rounded-full bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center mb-3 shadow-lg shadow-amber-700/20">
+          <span class="text-lg md:text-xl font-black text-white">3º</span>
+        </div>
+        <div class="text-lg md:text-xl font-black text-amber-600 mb-1">R$ <%= Math.floor(premioTotal * 0.1).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %></div>
+        <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">10% do prêmio</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Preview Cards - Simulação das seções internas -->
 <h2 class="text-2xl md:text-3xl font-bold text-copa-dark mb-6 animate-fade-in-up">
   Como funciona
