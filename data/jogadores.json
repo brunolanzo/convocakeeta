@@ -100,5 +100,10 @@
   {"nome": "Rayan", "posicao": "Atacante", "clube": "Bournemouth"},
   {"nome": "Samuel Lino", "posicao": "Atacante", "clube": "Atlético de Madrid"},
   {"nome": "Vitor Roque", "posicao": "Atacante", "clube": "Betis"},
-  {"nome": "Danilo (Meia)", "posicao": "Meia", "clube": "Botafogo"}
+  {"nome": "Danilo (Meia)", "posicao": "Meia", "clube": "Botafogo"},
+  {"nome": "Murillo Santiago", "posicao": "Zagueiro", "clube": "Nottingham Forest"},
+  {"nome": "Matheus Bidu", "posicao": "Lateral", "clube": "Corinthians"},
+  {"nome": "Rodrigo Garro", "posicao": "Meia", "clube": "Corinthians"},
+  {"nome": "Caio Vaz", "posicao": "Atacante", "clube": "Keeta FC"},
+  {"nome": "Breno Bidon", "posicao": "Meia", "clube": "Corinthians"}
 ]
