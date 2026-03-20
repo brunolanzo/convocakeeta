@@ -2,7 +2,15 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-const dbPath = path.join(__dirname, '..', 'convocakeeta.db');
+// Usar DB_PATH do .env para persistir fora do diretório do deploy
+const dbPath = process.env.DB_PATH || path.join(__dirname, '..', 'convocakeeta.db');
+
+// Garantir que o diretório do banco existe
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
+
 const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
